@@ -1,3 +1,6 @@
+import 'package:first_flutter_project/service/image_service.dart';
+import 'package:first_flutter_project/view/caption_box.dart';
+import 'package:first_flutter_project/view/image_grid.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -5,24 +8,18 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final images = const ImageService().getImages();
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Main Page'),
+        title: const Text('My First Project'),
       ),
       body: Column(
         children: [
-          Text('Main Page'),
-          Expanded(child: GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              padding: const EdgeInsets.all(10),
-              children: [
-                Image.asset('assets/images/images.jpg'),
-                Image.network('https://picsum.photos/400/300'),
-              ],
-            ),
+          Expanded(
+            child: ImageGrid(images: images),
           ),
+          const CaptionBox(text: 'The two images are displayed'),
         ],
       ),
     );
