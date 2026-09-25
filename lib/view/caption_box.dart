@@ -15,7 +15,11 @@ class CaptionBox extends StatelessWidget {
         border: Border.all(color: Colors.black26),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(text, textAlign: TextAlign.center),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontFamily: 'Suwannaphum'),
+      ),
     );
   }
 }

@@ -74,8 +74,8 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: suwannaphum
+    - family: Suwannaphum
       fonts:
-        - asset: fonts/Suwannaphum-Regular.ttf
+        - asset: assets/fonts/Suwannaphum-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
