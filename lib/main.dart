@@ -1,5 +1,7 @@
 import 'package:first_flutter_project/view/phase_one.dart';
+import 'package:first_flutter_project/view/phase_two.dart';
 import 'package:flutter/material.dart';
+import 'package:first_flutter_project/core/scroll_page_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      scrollBehavior: ScrollPageViewBehavior(),
       home: const HomeShell(),
     );
   }
@@ -32,6 +35,7 @@ class _HomeShellState extends State<HomeShell> {
 
   static const _pages = <Widget>[
     PhaseOne(),
+    PhaseTwo(),
   ];
 
   @override
@@ -48,6 +52,11 @@ class _HomeShellState extends State<HomeShell> {
             icon: Icon(Icons.looks_one_outlined),
             selectedIcon: Icon(Icons.looks_one),
             label: 'Phase One',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.looks_two_outlined),
+            selectedIcon: Icon(Icons.looks_two),
+            label: 'Phase Two',
           ),
         ],
       ),
