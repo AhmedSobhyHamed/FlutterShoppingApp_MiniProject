@@ -18,7 +18,11 @@ class CaptionBox extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontFamily: 'Suwannaphum'),
+        style: TextStyle(
+          fontFamily: Localizations.localeOf(context).languageCode == 'ar'
+              ? null
+              : 'Suwannaphum',
+        ),
       ),
     );
   }

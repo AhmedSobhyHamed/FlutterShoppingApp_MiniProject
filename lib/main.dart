@@ -1,19 +1,51 @@
+import 'package:first_flutter_project/core/scroll_page_view.dart';
+import 'package:first_flutter_project/l10n/app_locale.dart';
 import 'package:first_flutter_project/view/phase_one.dart';
 import 'package:first_flutter_project/view/phase_two.dart';
 import 'package:flutter/material.dart';
-import 'package:first_flutter_project/core/scroll_page_view.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterLocalization.instance.ensureInitialized();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final FlutterLocalization _localization = FlutterLocalization.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _localization.init(
+      initLanguageCode: 'en',
+      source: LocalizationSource.jsonAsset,
+      jsonLocales: const [
+        JsonLocale('en', 'assets/i18n/en.json'),
+        JsonLocale('ar', 'assets/i18n/ar.json'),
+      ],
+    );
+    _localization.onTranslatedLanguage = _onTranslatedLanguage;
+  }
+
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      locale: _localization.currentLocale,
+      supportedLocales: _localization.supportedLocales,
+      localizationsDelegates: _localization.localizationsDelegates,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -47,16 +79,16 @@ class _HomeShellState extends State<HomeShell> {
         onDestinationSelected: (index) {
           setState(() => _selectedIndex = index);
         },
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.looks_one_outlined),
-            selectedIcon: Icon(Icons.looks_one),
-            label: 'Phase One',
+            icon: const Icon(Icons.looks_one_outlined),
+            selectedIcon: const Icon(Icons.looks_one),
+            label: AppLocale.phaseOne.getString(context),
           ),
           NavigationDestination(
-            icon: Icon(Icons.looks_two_outlined),
-            selectedIcon: Icon(Icons.looks_two),
-            label: 'Phase Two',
+            icon: const Icon(Icons.looks_two_outlined),
+            selectedIcon: const Icon(Icons.looks_two),
+            label: AppLocale.phaseTwo.getString(context),
           ),
         ],
       ),

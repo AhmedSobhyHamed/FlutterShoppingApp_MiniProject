@@ -1,8 +1,11 @@
+import 'package:first_flutter_project/l10n/app_locale.dart';
 import 'package:first_flutter_project/service/image_service.dart';
 import 'package:first_flutter_project/view/phase_form.dart';
 import 'package:first_flutter_project/view/parts/caption_box.dart';
 import 'package:first_flutter_project/view/parts/image_grid.dart';
+import 'package:first_flutter_project/view/parts/language_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class PhaseOne extends StatelessWidget {
   const PhaseOne({super.key});
@@ -13,10 +16,11 @@ class PhaseOne extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My First Project'),
+        title: Text(AppLocale.myFirstProject.getString(context)),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         actions: [
+          const LanguageMenu(),
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
@@ -38,7 +42,7 @@ class PhaseOne extends StatelessWidget {
           Expanded(
             child: ImageGrid(images: images),
           ),
-          const CaptionBox(text: 'The two images are displayed'),
+          CaptionBox(text: AppLocale.twoImagesDisplayed.getString(context)),
         ],
       ),
     );

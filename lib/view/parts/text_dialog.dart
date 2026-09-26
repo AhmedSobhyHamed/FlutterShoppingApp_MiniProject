@@ -1,4 +1,6 @@
+import 'package:first_flutter_project/l10n/app_locale.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class TextDialog extends StatelessWidget {
   const TextDialog({super.key, required this.message});
@@ -12,7 +14,7 @@ class TextDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('OK'),
+          child: Text(AppLocale.ok.getString(context)),
         ),
       ],
     );

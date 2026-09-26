@@ -1,58 +1,62 @@
+import 'package:first_flutter_project/l10n/app_locale.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+
 class FullNameValidator {
-  static String? validate(String? value) {
+  static String? validate(BuildContext context, String? value) {
     if (value == null || value.isEmpty) {
-      return 'Full Name is required';
+      return AppLocale.fullNameRequired.getString(context);
     }
     if (!value.startsWith(value[0].toUpperCase())) {
-      return 'First letter must be capital';
+      return AppLocale.firstLetterCapital.getString(context);
     }
     if (value.length < 2) {
-      return 'Full Name must be at least 2 characters long';
+      return AppLocale.fullNameMinLength.getString(context);
     }
     return null;
   }
 }
 
 class EmailValidator {
-  static String? validate(String? value) {
+  static String? validate(BuildContext context, String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email is required';
+      return AppLocale.emailRequired.getString(context);
     }
     if (!value.contains('@')) {
-      return 'Email must contain @';
+      return AppLocale.emailAt.getString(context);
     }
     if (!value.contains('.')) {
-      return 'Email must contain .';
+      return AppLocale.emailDot.getString(context);
     }
     if (value.split('.').length != 2) {
-      return 'Email must contain only one .';
+      return AppLocale.emailOneDot.getString(context);
     }
     if (value.split('.').last.length < 2) {
-      return 'Email must contain at least 2 characters after the .';
+      return AppLocale.emailSuffix.getString(context);
     }
     return null;
   }
 }
 
 class PasswordValidator {
-  static String? validate(String? value) {
+  static String? validate(BuildContext context, String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password is required';
+      return AppLocale.passwordRequired.getString(context);
     }
     if (value.length < 6) {
-      return 'Password must be at least 6 characters long';
+      return AppLocale.passwordMinLength.getString(context);
     }
     return null;
   }
 }
 
 class ConfirmPasswordValidator {
-  static String? validate(String? value, String password) {
+  static String? validate(BuildContext context, String? value, String password) {
     if (value == null || value.isEmpty) {
-      return 'Confirm Password is required';
+      return AppLocale.confirmPasswordRequired.getString(context);
     }
     if (value != password) {
-      return 'Confirm Password must match Password';
+      return AppLocale.confirmPasswordMatch.getString(context);
     }
     return null;
   }

@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:first_flutter_project/l10n/app_locale.dart';
 import 'package:first_flutter_project/service/validators.dart';
 import 'package:first_flutter_project/view/parts/text_dialog.dart';
 import 'package:first_flutter_project/view/phase_two.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key});
@@ -17,6 +19,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   bool _isPasswordVisible = false;
+  bool _submitted = false;
   String _heroTag = 'hero_dialog_failure';
 
   @override
@@ -28,7 +31,18 @@ class _RegistrationFormState extends State<RegistrationForm> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_submitted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _formKey.currentState?.validate();
+      });
+    }
+  }
+
   Future<void> _submit() async {
+    _submitted = true;
     final success = _formKey.currentState!.validate();
     setState(() {
       _heroTag = success ? 'hero_dialog_success' : 'hero_dialog_failure';
@@ -38,8 +52,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
       context: context,
       builder: (context) => TextDialog(
         message: success
-            ? 'Account created successfully'
-            : 'Account creation failed',
+            ? AppLocale.accountCreated.getString(context)
+            : AppLocale.accountFailed.getString(context),
       ),
     );
     if (!mounted) return;
@@ -108,17 +122,39 @@ class _RegistrationFormState extends State<RegistrationForm> {
       child: Column(
         spacing: 20,
         children: [
-          _buildTextField('Full Name', _fullNameController, FullNameValidator.validate),
-          _buildTextField('Email', _emailController, EmailValidator.validate),
-          _buildTextField('Password', _passwordController, PasswordValidator.validate, true),
-          _buildTextField('Confirm Password', _confirmPasswordController, (value) => ConfirmPasswordValidator.validate(value, _passwordController.text), true),
+          _buildTextField(
+            AppLocale.fullName.getString(context),
+            _fullNameController,
+            (value) => FullNameValidator.validate(context, value),
+          ),
+          _buildTextField(
+            AppLocale.email.getString(context),
+            _emailController,
+            (value) => EmailValidator.validate(context, value),
+          ),
+          _buildTextField(
+            AppLocale.password.getString(context),
+            _passwordController,
+            (value) => PasswordValidator.validate(context, value),
+            true,
+          ),
+          _buildTextField(
+            AppLocale.confirmPassword.getString(context),
+            _confirmPasswordController,
+            (value) => ConfirmPasswordValidator.validate(
+              context,
+              value,
+              _passwordController.text,
+            ),
+            true,
+          ),
           ElevatedButton(
             onPressed: _submit,
             child: Hero(
               tag: _heroTag,
               child: Material(
                 type: MaterialType.transparency,
-                child: const Text('Submit'),
+                child: Text(AppLocale.submit.getString(context)),
               ),
             ),
           ),

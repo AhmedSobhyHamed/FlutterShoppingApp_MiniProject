@@ -1,5 +1,6 @@
-import 'package:first_flutter_project/data/image_asset.dart';
 import 'package:first_flutter_project/data/card_asset.dart';
+import 'package:first_flutter_project/data/image_asset.dart';
+import 'package:first_flutter_project/l10n/app_locale.dart';
 
 class ImageService {
   const ImageService();
@@ -25,19 +26,19 @@ class ImageService {
 
   List<CardAsset> getProductCards() {
     return const [
-      CardAsset(name: 'Product 1', description: 'Description 1', price: 100, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Product 2', description: 'Description 2', price: 200, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Product 3', description: 'Description 3', price: 300, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Product 4', description: 'Description 4', price: 400, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.product1, description: AppLocale.description1, price: 100, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.product2, description: AppLocale.description2, price: 200, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.product3, description: AppLocale.description3, price: 300, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.product4, description: AppLocale.description4, price: 400, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
     ];
   }
   List<CardAsset> getOfferCards() {
     return const [
-      CardAsset(name: 'Offer 1', description: 'Description 1', price: 100, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Offer 2', description: 'Description 2', price: 200, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Offer 3', description: 'Description 3', price: 300, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Offer 4', description: 'Description 4', price: 400, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
-      CardAsset(name: 'Offer 5', description: 'Description 5', price: 500, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.offer1, description: AppLocale.description1, price: 100, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.offer2, description: AppLocale.description2, price: 200, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.offer3, description: AppLocale.description3, price: 300, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.offer4, description: AppLocale.description4, price: 400, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
+      CardAsset(name: AppLocale.offer5, description: AppLocale.description5, price: 500, imageAssets: [ImageAsset(path: 'assets/images/images.jpg', type: ImageType.local)]),
     ];
   }
 }

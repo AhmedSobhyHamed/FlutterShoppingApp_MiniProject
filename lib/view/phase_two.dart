@@ -1,9 +1,11 @@
-import 'package:first_flutter_project/data/image_asset.dart';
+import 'package:first_flutter_project/l10n/app_locale.dart';
 import 'package:first_flutter_project/service/image_service.dart';
 import 'package:first_flutter_project/view/parts/card_grid.dart';
 import 'package:first_flutter_project/view/parts/card_view.dart';
 import 'package:first_flutter_project/view/parts/image_view.dart';
+import 'package:first_flutter_project/view/parts/language_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class PhaseTwo extends StatelessWidget {
   const PhaseTwo({super.key});
@@ -18,22 +20,25 @@ class PhaseTwo extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My First Project'),
+        title: Text(AppLocale.myFirstProject.getString(context)),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
+        actions: const [
+          LanguageMenu(),
+        ],
       ),
       body: Container(
         height: _height,
         child: Column(
           children: [
             Expanded(child: ImageView(images: products)), 
-            const Hero(
+            Hero(
               tag: 'hero_dialog_success',
               child: Material(
                 type: MaterialType.transparency,
                 child: Text(
-                  'Our Products',
-                  style: TextStyle(
+                  AppLocale.ourProducts.getString(context),
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.deepPurple,
@@ -42,7 +47,14 @@ class PhaseTwo extends StatelessWidget {
               ),
             ),
             Expanded(child: CardGrid(cards: cards)),
-            const Text('Hot Offers', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.deepPurple)),
+            Text(
+              AppLocale.hotOffers.getString(context),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple,
+              ),
+            ),
             Expanded(child: CardView(cards: offers)),
           ],
         ),
