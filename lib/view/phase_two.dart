@@ -27,7 +27,20 @@ class PhaseTwo extends StatelessWidget {
         child: Column(
           children: [
             Expanded(child: ImageView(images: products)), 
-            Hero(tag: 'hero_dialog_success', child: const Text('Our Products', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.deepPurple))),
+            const Hero(
+              tag: 'hero_dialog_success',
+              child: Material(
+                type: MaterialType.transparency,
+                child: Text(
+                  'Our Products',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple,
+                  ),
+                ),
+              ),
+            ),
             Expanded(child: CardGrid(cards: cards)),
             const Text('Hot Offers', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.deepPurple)),
             Expanded(child: CardView(cards: offers)),

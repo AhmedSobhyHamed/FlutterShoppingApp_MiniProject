@@ -17,9 +17,20 @@ class PhaseOne extends StatelessWidget {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         actions: [
-          Hero(tag: 'hero_dialog_failure', child: IconButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhaseForm()));
-          }, icon: Icon(Icons.person_add))),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(builder: (context) => const PhaseForm()),
+              );
+            },
+            icon: const Hero(
+              tag: 'hero_dialog_failure',
+              child: Material(
+                type: MaterialType.transparency,
+                child: Icon(Icons.person_add),
+              ),
+            ),
+          ),
         ],
       ),
       body: Column(

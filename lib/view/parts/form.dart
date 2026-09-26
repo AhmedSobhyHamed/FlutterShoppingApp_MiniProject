@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:first_flutter_project/service/validators.dart';
 import 'package:first_flutter_project/view/parts/text_dialog.dart';
-import 'package:first_flutter_project/view/phase_one.dart';
 import 'package:first_flutter_project/view/phase_two.dart';
 
 class RegistrationForm extends StatefulWidget {
@@ -29,29 +28,30 @@ class _RegistrationFormState extends State<RegistrationForm> {
     super.dispose();
   }
 
-  void _submit() {
-    if (_formKey.currentState!.validate()) {
-      _showDialog('Account created successfully', PhaseTwo());
-      setState(() {
-        _heroTag = 'hero_dialog_success';
-      });
-    } else {
-      _showDialog('Account creation failed', PhaseOne());
-      setState(() {
-        _heroTag = 'hero_dialog_failure';
-      });
+  Future<void> _submit() async {
+    final success = _formKey.currentState!.validate();
+    setState(() {
+      _heroTag = success ? 'hero_dialog_success' : 'hero_dialog_failure';
+    });
+
+    await showDialog<void>(
+      context: context,
+      builder: (context) => TextDialog(
+        message: success
+            ? 'Account created successfully'
+            : 'Account creation failed',
+      ),
+    );
+    if (!mounted) return;
+
+    final navigator = Navigator.of(context);
+    if (success) {
+      navigator.pushReplacement(
+        MaterialPageRoute<void>(builder: (context) => const PhaseTwo()),
+      );
+      return;
     }
-  }
-
-  void _showDialog(String message, Widget link) {
-    showDialog(context: context, builder: (context) => TextDialog(message: message, link: link))
-    .then((_) => _closeDialog(link));
-  }
-
-  void _closeDialog(Widget link) {
-    Navigator.of(context).pop();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => link));
-    
+    navigator.pop();
   }
 
   Widget _buildTextField(String label, TextEditingController controller, String? Function(String?)? validator, [bool isPassword = false]) {
@@ -112,14 +112,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
           _buildTextField('Email', _emailController, EmailValidator.validate),
           _buildTextField('Password', _passwordController, PasswordValidator.validate, true),
           _buildTextField('Confirm Password', _confirmPasswordController, (value) => ConfirmPasswordValidator.validate(value, _passwordController.text), true),
-          Hero(
-            tag: _heroTag, 
-            child: ElevatedButton(
-              onPressed: () {
-                _submit();
-              },
-              child: Text('Submit'),
-            )
+          ElevatedButton(
+            onPressed: _submit,
+            child: Hero(
+              tag: _heroTag,
+              child: Material(
+                type: MaterialType.transparency,
+                child: const Text('Submit'),
+              ),
+            ),
           ),
         ],
       ),
