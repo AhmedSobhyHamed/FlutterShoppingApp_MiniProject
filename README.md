@@ -153,18 +153,20 @@ flutter analyze          # static analysis
 
 Local and remote images, caption, and the language menu.
 
-![Phase One](.git_images/app1-1.png)
+![Phase One](.git_images/app1-2.png)
 
 ### Registration
 
 Form, validation, and the result dialog.
 
-![Registration form](.git_images/app2-1.png)
-![Registration dialog](.git_images/app2-2.png)
+![Registration form](.git_images/app3-1.png)
+![Registration dialog failed](.git_images/app3-2.png)
+![Registration dialog Arabic](.git_images/app3-3.png)
+![Registration dialog success](.git_images/app3-4.png)
 
 ### Phase Two — products
 
 Page view, product cards, and hot offers. English and Arabic.
 
-![Phase Two English](.git_images/app3-1.png)
-![Phase Two Arabic](.git_images/app3-2.png)
+![Phase Two English](.git_images/app2-3.png)
+![Phase Two Arabic](.git_images/app2-5.png)
